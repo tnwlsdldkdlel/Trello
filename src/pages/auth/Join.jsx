@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { validateUserInfo } from "../../utils/validation";
 import { UserJoin } from "../../api/AuthApi";
 import handleFirebaseError from "../../utils/handleFirebaseError";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/features/authSlice";
 
 export const Join = () => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ export const Join = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const dispath = useDispatch();
 
   const changeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -30,7 +33,8 @@ export const Join = () => {
 
       const result = validateUserInfo(input);
       if (result.length === 0) {
-        await UserJoin(input);
+        const user = await UserJoin(input);
+        dispath(loginSuccess(user.uid));
         navigate("/");
       } else {
         setError(result);

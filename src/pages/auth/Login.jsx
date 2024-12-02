@@ -2,6 +2,11 @@ import { useState } from "react";
 import { GoogleLoginBtn } from "../../components/auth/GoogleLoginBtn";
 import "../../styles/auth.css";
 import { useNavigate } from "react-router-dom";
+import { UserLogin } from "../../api/AuthApi";
+import handleFirebaseError from "../../utils/handleFirebaseError";
+import { validateLoginInfo } from "../../utils/validation";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/features/authSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -10,17 +15,32 @@ export const Login = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const dispath = useDispatch();
 
   const changeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const clickLoginBtn = async () => {
-    setLoading(true);
+    try {
+      setLoading(true);
+      const result = validateLoginInfo(input);
+      if (result.length === 0) {
+        const user = await UserLogin(input);
+        dispath(loginSuccess(user.uid));
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setLoading(false);
+        // 보드가 없는 경우 선택.
+        navigate("/welcome");
+      } else {
+        setError(result);
+      }
+    } catch (error) {
+      console.error(error);
+      setError(handleFirebaseError(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clickJoin = () => {
@@ -30,6 +50,11 @@ export const Login = () => {
   return (
     <div className="auth">
       <div className="content">
+        {loading && (
+          <div className="spinner-overlay">
+            <div className="spinner"></div>
+          </div>
+        )}
         <div className="title">로그인</div>
         <div className="login">
           <input
@@ -50,8 +75,9 @@ export const Login = () => {
             onClick={clickLoginBtn}
             disabled={loading}
           >
-            {loading ? <div className="spinner"></div> : "로그인"}
+            로그인
           </button>
+          <p className="error-message">{error}</p>
         </div>
         <div className="social-login">
           <p>소셜계정으로 로그인하기</p>
