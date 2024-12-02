@@ -89,5 +89,45 @@
   align-items: center;
   justify-content: center;
   color: var(--text-primary);
+}
+
+.auth .content .login .error-message {
+  color: red;
+  margin: 0px auto;
+  font-weight: bold;
+}
+
+.auth .content .send {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth .content .send .email {
   font-weight: bolder;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.auth .content .send .btns {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.auth .content .send .btns .resend {
+  border: 1px solid white;
+  background-color: var(--text-primary);
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+}
+
+.auth .content .send .btns .change {
+  border: 1px solid var(--text-secondary);
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
 }

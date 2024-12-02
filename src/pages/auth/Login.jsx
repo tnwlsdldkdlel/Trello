@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { GoogleLoginBtn } from "../../components/auth/GoogleLoginBtn";
 import "../../styles/auth.css";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const changeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -19,6 +21,10 @@ export const Login = () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setLoading(false);
+  };
+
+  const clickJoin = () => {
+    navigate("/auth/join");
   };
 
   return (
@@ -54,7 +60,9 @@ export const Login = () => {
         <div className="no-login">
           <p className="clickable">로그인이 안되나요?</p>
           <p style={{ color: "black" }}>•</p>
-          <p className="clickable">회원가입하기</p>
+          <p className="clickable" onClick={clickJoin}>
+            계정 만들기
+          </p>
         </div>
       </div>
     </div>
