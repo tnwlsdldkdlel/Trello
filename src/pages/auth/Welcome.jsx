@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "../../styles/welcome.css";
-import { SelectTarget } from "../../components/auth/SelectTarget";
+import { SelectTarget } from "../../components/welcome/SelectTarget";
 import { CreateBoard } from "../../components/welcome/CreateBoard";
 import { createTeam } from "../../api/Team";
 import { useSelector } from "react-redux";
 import { createBoard } from "../../api/BoardApi";
 import { useNavigate } from "react-router-dom";
+import { CreateTeam } from "../../components/welcome/CreateTeam";
 
 export const Welcome = () => {
   const [step, setStep] = useState("target");
@@ -24,6 +25,8 @@ export const Welcome = () => {
       await createBoard(teamUid, board);
 
       naviage("/");
+    } else {
+      setStep("team");
     }
   };
 
@@ -40,6 +43,14 @@ export const Welcome = () => {
             board={board}
             clickCreateBoard={clickCreateBoard}
           ></CreateBoard>
+        )}
+        {step === "team" && (
+          <CreateTeam
+            setStep={setStep}
+            changeBoard={changeBoard}
+            board={board}
+            clickCreateBoard={clickCreateBoard}
+          ></CreateTeam>
         )}
       </div>
     </div>

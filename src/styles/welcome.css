@@ -1,6 +1,5 @@
 .welcome {
   margin: 0px auto;
-  color: white;
   padding: 20px;
   border-radius: 8px;
 }
@@ -15,10 +14,16 @@
 
 .welcome .step .title {
   font-size: xx-large;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.welcome .step .sub-title {
+  margin-top: 20px;
 }
 
 .welcome .step .target {
-  margin-top: 80px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -26,7 +31,7 @@
 }
 
 .welcome .step .target div {
-  border: 1px solid white;
+  border: 1px solid var(--text-secondary);
   border-radius: 5px;
   padding: 20px;
   display: flex;
@@ -36,10 +41,11 @@
 }
 
 .welcome .step .target .clickable.hover {
-  background-color: white;
-  color: var(--text-primary);
+  background-color: var(--text-primary);
+  color: white;
   cursor: pointer;
   font-weight: bolder;
+  border: none;
 }
 
 .welcome .step .target div svg {
@@ -47,19 +53,111 @@
   height: 25px;
 }
 
-.welcome .content .step .target input {
-  border: 1px solid white;
+.welcome .content .step .target input,
+.welcome .content .step .target2 input {
+  border: 1px solid var(--text-secondary);
   border-radius: 5px;
-  background-color: var(--text-primary);
+  background-color: white;
   padding: 20px;
-  color: white;
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+  &:focus {
+    outline-color: var(--text-primary);
+  }
 }
 
-.welcome .content .step .target .next-btn {
+.welcome .content .step .target .next-btn.active,
+.welcome .content .step .target2 .next-btn.active {
   margin-top: 30px;
   border: 1px solid white;
-  background-color: white;
+  background-color: var(--text-primary);
   border-radius: 5px;
   width: 80px;
   padding: 10px;
+  color: white;
+}
+
+.welcome .content .step .target .next-btn,
+.welcome .content .step .target2 .next-btn {
+  margin-top: 30px;
+  border: 1px solid white;
+  background-color: var(--text-secondary);
+  border-radius: 5px;
+  width: 80px;
+  padding: 10px;
+  color: white;
+}
+
+.welcome .step .target2 {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 500px;
+}
+
+.welcome .step .target2 .user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid var(--text-secondary);
+  border-radius: 5px;
+}
+
+.welcome .step .target2 .user-list [class^="user_"] {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.welcome .step .target2 .user-list [class^="user_"] svg,
+.welcome .step .target2 .user-list [class^="user_"] img {
+  width: 40px;
+  height: 40px;
+  color: var(--text-secondary);
+}
+
+.welcome .step .target2 .user-list [class^="user_"] div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome .step .target2 .user-list [class^="user_"]:hover {
+  background-color: var(--text-primary);
+  color: white;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.welcome .step .target2 .user-list [class^="user_"]:hover svg {
+  color: white;
+}
+
+.welcome .step .target2 .selected-user {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.welcome .step .target2 .selected-user [class^="user_"] {
+  background-color: var(--text-secondary);
+  width: max-content;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  gap: 5px;
+}
+
+.welcome .step .target2 .selected-user [class^="user_"] svg {
+  width: 19px;
+  height: 19px;
 }

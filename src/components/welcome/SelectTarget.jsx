@@ -1,11 +1,9 @@
 export const SelectTarget = ({ setStep, setTarget }) => {
   const mouseOverTarget = (e) => {
-    if (e.target.className.indexOf("clickable") > -1) {
-      if (e.target.className.indexOf("hover") > -1) {
-        e.target.className = e.target.className.replaceAll(" hover", "");
-      } else {
-        e.target.className += " hover";
-      }
+    if (e.target.className.indexOf("hover") > -1) {
+      e.target.className = e.target.className.replaceAll(" hover", "");
+    } else {
+      e.target.className += " hover";
     }
   };
 
@@ -16,7 +14,10 @@ export const SelectTarget = ({ setStep, setTarget }) => {
 
   return (
     <div className="step">
-      <div className="title">어떤 작업을 하실건가요?</div>
+      <div className="title">
+        <b>뚝딱</b>에 오신걸 환영해요 🙋‍♀️
+      </div>
+      <div className="sub-title">누구와 작업을 할건지 골라주세요!</div>
       <div className="target">
         <div
           className="clickable"

@@ -1,11 +1,7 @@
 :root {
   --text-primary: rgb(175, 42, 42);
-  --text-secondary: #7a869a;
+  --text-secondary: #7981906f;
   --text-warning: rgb(239, 15, 15);
-}
-
-body {
-  background-color: var(--text-primary);
 }
 
 .clickable {
